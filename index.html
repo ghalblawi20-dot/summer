@@ -228,6 +228,47 @@
 
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
 
+  /* ====== رحلة نقاط الفرق (خريطة الكنز) ====== */
+  .pt-view{width:100%;max-width:1060px}
+  .pt-hidden{display:none!important}
+  .tmap{max-width:640px;width:100%;margin:0 auto 22px;background:#EFE0B8;border:6px dashed #C9A968;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 14px;position:relative}
+  .tpath{display:flex;justify-content:space-between;align-items:center;position:relative}
+  .tpath::before{content:'';position:absolute;top:50%;right:6%;left:6%;height:4px;background:repeating-linear-gradient(90deg,#C9A968 0 10px,transparent 10px 18px);transform:translateY(-50%);z-index:0}
+  .tisland{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:5px;transition:transform .15s}
+  .tisland:active{transform:scale(.9)}
+  .tisland .isle{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#C7E8A8,#8FBF6B);display:grid;place-items:center;font-size:20px;box-shadow:var(--shadow);font-weight:800;color:#2F5B22}
+  .tisland .lbl{font-size:12px;font-weight:700;color:var(--deep-soft)}
+  .tisland .cnt{font-size:10px;color:var(--deep-soft);opacity:.85}
+  .tchest{position:relative;z-index:1;width:58px;height:58px;font-size:28px;display:grid;place-items:center;background:linear-gradient(180deg,#FFE08A,var(--sun));border-radius:16px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
+  .tchest:active{transform:scale(.9)}
+  .tfleet{display:flex;flex-direction:column;gap:10px;max-width:640px;width:100%;margin:0 auto}
+  .tship{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:10px 14px;display:flex;align-items:center;gap:10px}
+  .tship .trank{width:22px;height:22px;border-radius:50%;background:var(--sky);display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0}
+  .tship .icon{font-size:19px}
+  .tship .who{width:104px;font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tship .track2{flex:1;height:10px;background:var(--sky);border-radius:999px;overflow:hidden}
+  .tship .fill{height:100%;border-radius:999px;transition:width .6s cubic-bezier(.4,1.2,.5,1)}
+  .tship .pts{width:52px;text-align:left;font-weight:800;font-size:13px;color:var(--deep-soft)}
+  .pt-team-row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:8px 12px;margin-bottom:8px;flex-wrap:wrap}
+  .pt-team-row input[type=text]{flex:1;min-width:80px;border:none;background:transparent;font:inherit;font-weight:700;color:var(--deep);outline:none}
+  .pt-color-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;border:2px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.08);cursor:pointer}
+  .pt-swatches{display:flex;gap:6px;flex-wrap:wrap;width:100%;margin-top:2px}
+  .pt-swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent}
+  .pt-swatch.sel{border-color:var(--deep)}
+  .pt-del{color:#E04B3A;font-size:18px;padding:4px 8px;flex-shrink:0}
+  .pt-act-row{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:10px 14px;margin-bottom:10px}
+  .pt-act-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;margin-bottom:6px;gap:8px}
+  .pt-act-pts{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--deep-soft)}
+  .pt-act-pts span.tp{background:var(--sand);border-radius:999px;padding:3px 10px;font-weight:700}
+  .pt-act-actions button{font-size:15px;padding:2px 8px}
+  .pt-form-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .pt-form-row .dot2{width:16px;height:16px;border-radius:50%;flex-shrink:0}
+  .pt-form-row .nm{flex:1;font-weight:700;font-size:14px;text-align:right}
+  .pt-form-row input[type=number]{width:60px;padding:6px;border-radius:8px;border:1px solid #E4DCCB;text-align:center;font:inherit}
+  .pt-rank-badge{width:26px;height:26px;border-radius:50%;background:var(--sky);display:grid;place-items:center;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0;border:2px solid transparent}
+  .pt-rank-badge.set{background:var(--sun);border-color:#B8860B}
+  #ptActBox input[type=text]{width:100%;padding:9px 12px;border-radius:10px;border:1px solid #E4DCCB;font:inherit;margin-bottom:12px;text-align:right}
+
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none!important;transition:none!important}
   }
@@ -242,6 +283,7 @@
 
 <!-- ============ شاشة البداية ============ -->
 <section class="screen active" id="start">
+  <button class="icon-btn" style="position:fixed;top:16px;left:16px;font-size:20px;z-index:2" onclick="ptOpenPoints()" aria-label="نقاط الأسابيع">🗺️</button>
   <button class="sun-btn" id="sunBtn" aria-label="ابدأ">
     <span class="rays"></span>
     <svg class="face" viewBox="0 0 100 100">
@@ -261,6 +303,7 @@
 <section class="screen" id="menu">
   <div class="topbar">
     <button class="icon-btn" onclick="go('start')" aria-label="الرئيسية" data-icon="home"></button>
+    <button class="icon-btn" style="font-size:20px" onclick="ptOpenPoints()" aria-label="نقاط الأسابيع">🗺️</button>
     <button class="icon-btn muteBtn" aria-label="الصوت" data-icon="sound"></button>
   </div>
   <h2 class="menu-title">اختاروا اللعبة</h2>
@@ -303,6 +346,40 @@
     <div class="game-card locked"><span class="g-icon"></span><span class="g-name">اللعبة الرابعة</span></div>
     <div class="game-card locked"><span class="g-icon"></span><span class="g-name">اللعبة الخامسة</span></div>
     <div class="game-card locked"><span class="g-icon"></span><span class="g-name">اللعبة السادسة</span></div>
+  </div>
+</section>
+
+<!-- ============ رحلة نقاط الفرق ============ -->
+<section class="screen" id="points">
+  <div class="topbar">
+    <div class="side">
+      <button class="icon-btn" onclick="go('start')" aria-label="الرئيسية" data-icon="home"></button>
+    </div>
+    <h2>رحلة نقاط الفرق</h2>
+    <div class="side">
+      <button class="icon-btn" style="font-size:20px" onclick="ptShowView('teams')" aria-label="إدارة الفرق">👥</button>
+      <button class="icon-btn" style="font-size:20px" onclick="ptConfirmReset()" aria-label="حذف كل البيانات">🗑️</button>
+    </div>
+  </div>
+
+  <div id="ptMap" class="pt-view">
+    <p class="menu-sub">اضغطوا على جزيرة أي أسبوع لتسجيل نقاط أنشطته، وفي النهاية افتحوا صندوق الكنز لإعلان الفائز</p>
+    <div class="tmap" id="tmapWrap"></div>
+    <div class="tfleet" id="tfleetWrap"></div>
+  </div>
+
+  <div id="ptWeek" class="pt-view pt-hidden">
+    <button class="btn ghost" onclick="ptShowView('map')">⟵ رجوع للخريطة</button>
+    <h3 id="ptWeekTitle" style="margin:14px 0 10px"></h3>
+    <div id="ptActivities"></div>
+    <button class="btn coral" style="margin-top:6px" onclick="ptOpenActivityModal()">+ إضافة نشاط</button>
+  </div>
+
+  <div id="ptTeams" class="pt-view pt-hidden">
+    <button class="btn ghost" onclick="ptShowView('map')">⟵ رجوع للخريطة</button>
+    <h3 style="margin:14px 0 10px">إدارة الفرق</h3>
+    <div id="ptTeamsList"></div>
+    <button class="btn" style="margin-top:6px" onclick="ptAddTeam()">+ إضافة فريق</button>
   </div>
 </section>
 
@@ -400,6 +477,23 @@
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px">
       <button class="btn" onclick="replayGame()">نلعب مرة ثانية</button>
       <button class="btn ghost" onclick="go('menu');hideWin()">قائمة الألعاب</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ نافذة إضافة/تعديل نشاط ============ -->
+<div class="overlay" id="ptActOverlay">
+  <div class="win-box" id="ptActBox" style="text-align:right"></div>
+</div>
+
+<!-- ============ نافذة إعلان فائز الأسابيع ============ -->
+<div class="overlay" id="ptWinOverlay2">
+  <div class="win-box">
+    <div style="font-size:56px">🎁</div>
+    <h3 id="ptWinTitle">مبروك!</h3>
+    <div class="rank" id="ptRankList"></div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:10px">
+      <button class="btn" onclick="ptCloseWinner()">إغلاق</button>
     </div>
   </div>
 </div>
@@ -975,6 +1069,250 @@ function anim(){
   parts=parts.filter(p=>p.life>0&&p.y<cvs.height+30);
   if(parts.length){requestAnimationFrame(anim)}else{animing=false;ctx.clearRect(0,0,cvs.width,cvs.height)}
 }
+
+/* ================= رحلة نقاط الفرق (خريطة الكنز) ================= */
+const PT_KEY='nadiPointsV1';
+const PT_SHIP_ICONS=['⛵','🚤','🛶','🚣','🏄','🛟','🚢','🐬'];
+const PT_RANK_PTS=[10,8,6,4,2,1];
+const PT_PALETTE=['var(--t1)','var(--t2)','var(--t3)','var(--t4)','var(--t5)','var(--t6)','#FF6F91','#4DD0C4','#FFB74D','#64B5F6'];
+
+function ptDefaultData(){
+  return {
+    teams: TEAM_DEFS.map((t,i)=>({id:i+1,name:t.name,color:t.c})),
+    weeks: [0,1,2,3].map(()=>({activities:[]}))
+  };
+}
+function ptLoad(){
+  try{
+    const raw=localStorage.getItem(PT_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return ptDefaultData();
+}
+let ptData=ptLoad();
+function ptSave(){ localStorage.setItem(PT_KEY, JSON.stringify(ptData)); }
+
+function ptWeekTotal(w,teamId){
+  return ptData.weeks[w].activities.reduce((s,a)=>s+(Number(a.pts[teamId])||0),0);
+}
+function ptGrandTotal(teamId){
+  return ptData.weeks.reduce((s,_,w)=>s+ptWeekTotal(w,teamId),0);
+}
+
+let ptCurWeek=0;
+function ptOpenPoints(){ go('points'); ptShowView('map'); }
+function ptShowView(name){
+  document.querySelectorAll('#points .pt-view').forEach(v=>v.classList.add('pt-hidden'));
+  document.getElementById('pt'+name.charAt(0).toUpperCase()+name.slice(1)).classList.remove('pt-hidden');
+  if(name==='map') ptRenderMap();
+  if(name==='teams') ptRenderTeamsManage();
+}
+
+function ptRenderMap(){
+  const wrap=document.getElementById('tmapWrap');
+  const islands=ptData.weeks.map((wk,i)=>{
+    const n=wk.activities.length;
+    return `<button class="tisland" onclick="ptOpenWeek(${i})">
+      <span class="isle">${i+1}</span>
+      <span class="lbl">الأسبوع ${i+1}</span>
+      <span class="cnt">${n? n+' نشاط':'فاضي'}</span>
+    </button>`;
+  }).join('');
+  wrap.innerHTML=`<div class="tpath">${islands}
+    <button class="tchest" onclick="ptRevealWinner()" aria-label="إعلان الفائز">🎁</button>
+  </div>`;
+  ptRenderFleet();
+}
+
+function ptRenderFleet(){
+  const wrap=document.getElementById('tfleetWrap');
+  const totals=ptData.teams.map(t=>({...t,total:ptGrandTotal(t.id)}));
+  const max=Math.max(1,...totals.map(t=>t.total));
+  const sorted=[...totals].sort((a,b)=>b.total-a.total);
+  wrap.innerHTML=sorted.map((t,i)=>`
+    <div class="tship">
+      <span class="trank">${i+1}</span>
+      <span class="icon">${PT_SHIP_ICONS[i%PT_SHIP_ICONS.length]}</span>
+      <span class="who">${t.name}</span>
+      <div class="track2"><div class="fill" style="width:${(t.total/max*100).toFixed(0)}%;background:${t.color}"></div></div>
+      <span class="pts">${t.total}</span>
+    </div>`).join('');
+}
+
+function ptOpenWeek(w){
+  ptCurWeek=w;
+  document.getElementById('ptWeekTitle').textContent='جزيرة الأسبوع '+(w+1);
+  ptRenderActivities();
+  ptShowView('week');
+}
+function ptRenderActivities(){
+  const w=ptCurWeek;
+  const list=ptData.weeks[w].activities;
+  const box=document.getElementById('ptActivities');
+  if(!list.length){
+    box.innerHTML='<p class="menu-sub">ما فيه أنشطة مسجلة بعد لهذا الأسبوع</p>';
+    return;
+  }
+  box.innerHTML=list.map(a=>`
+    <div class="pt-act-row">
+      <div class="pt-act-head">
+        <span>${a.name}</span>
+        <span class="pt-act-actions">
+          <button onclick="ptOpenActivityModal(${a.id})">✏️</button>
+          <button onclick="ptDeleteActivity(${a.id})">🗑️</button>
+        </span>
+      </div>
+      <div class="pt-act-pts">
+        ${ptData.teams.map(t=>`<span class="tp">${t.name}: ${a.pts[t.id]||0}</span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+let ptRankOrder=[];
+function ptOpenActivityModal(activityId){
+  const editing=activityId!=null;
+  const act=editing ? ptData.weeks[ptCurWeek].activities.find(a=>a.id===activityId) : {id:Date.now(),name:'',pts:{}};
+  ptRankOrder=[];
+  const box=document.getElementById('ptActBox');
+  box.innerHTML=`
+    <h3 style="margin-bottom:10px">${editing?'تعديل نشاط':'نشاط جديد'}</h3>
+    <input type="text" id="ptActName" placeholder="اسم النشاط (مثال: سباق التتابع)" value="${(act.name||'').replace(/"/g,'&quot;')}">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px">
+      <span style="font-size:13px;color:var(--deep-soft);font-weight:700">اضغطوا ترتيب الفرق حسب الفوز (اختياري)</span>
+      <button class="btn ghost" style="padding:4px 12px;font-size:12px" onclick="ptResetRank()">تصفير</button>
+    </div>
+    <div id="ptFormRows">
+    ${ptData.teams.map(t=>`
+      <div class="pt-form-row">
+        <span class="pt-rank-badge" id="ptRankB${t.id}" onclick="ptTapRank(${t.id})">–</span>
+        <span class="dot2" style="background:${t.color}"></span>
+        <span class="nm">${t.name}</span>
+        <input type="number" id="ptPts${t.id}" value="${act.pts[t.id]||0}">
+      </div>`).join('')}
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:14px">
+      <button class="btn" onclick="ptSaveActivity(${act.id}, ${editing})">حفظ</button>
+      <button class="btn ghost" onclick="ptCloseActivityModal()">إلغاء</button>
+    </div>
+  `;
+  document.getElementById('ptActOverlay').classList.add('show');
+}
+function ptCloseActivityModal(){ document.getElementById('ptActOverlay').classList.remove('show'); }
+function ptTapRank(teamId){
+  const idx=ptRankOrder.indexOf(teamId);
+  if(idx>-1) ptRankOrder.splice(idx,1);
+  else ptRankOrder.push(teamId);
+  ptData.teams.forEach(t=>{
+    const b=document.getElementById('ptRankB'+t.id);
+    const order=ptRankOrder.indexOf(t.id);
+    if(order>-1){
+      b.textContent=(order+1);
+      b.classList.add('set');
+      document.getElementById('ptPts'+t.id).value=PT_RANK_PTS[order] ?? 1;
+    }else{
+      b.textContent='–';
+      b.classList.remove('set');
+    }
+  });
+}
+function ptResetRank(){
+  ptRankOrder=[];
+  ptData.teams.forEach(t=>{
+    const b=document.getElementById('ptRankB'+t.id);
+    b.textContent='–';b.classList.remove('set');
+  });
+}
+function ptSaveActivity(id,editing){
+  const name=document.getElementById('ptActName').value.trim()||'نشاط بدون اسم';
+  const pts={};
+  ptData.teams.forEach(t=>{ pts[t.id]=Number(document.getElementById('ptPts'+t.id).value)||0; });
+  const list=ptData.weeks[ptCurWeek].activities;
+  if(editing){
+    const a=list.find(a=>a.id===id);
+    a.name=name;a.pts=pts;
+  }else{
+    list.push({id,name,pts});
+  }
+  ptSave();
+  ptCloseActivityModal();
+  ptRenderActivities();
+}
+function ptDeleteActivity(id){
+  if(!confirm('تحذفون هذا النشاط؟')) return;
+  ptData.weeks[ptCurWeek].activities=ptData.weeks[ptCurWeek].activities.filter(a=>a.id!==id);
+  ptSave();
+  ptRenderActivities();
+}
+
+/* إدارة الفرق */
+function ptRenderTeamsManage(){
+  const box=document.getElementById('ptTeamsList');
+  box.innerHTML=ptData.teams.map(t=>`
+    <div class="pt-team-row">
+      <span class="pt-color-dot" style="background:${t.color}" onclick="ptToggleSwatches(${t.id})"></span>
+      <input type="text" value="${t.name.replace(/"/g,'&quot;')}" oninput="ptRenameTeam(${t.id}, this.value)">
+      ${ptData.teams.length>2 ? `<button class="pt-del" onclick="ptDeleteTeam(${t.id})">✕</button>` : ''}
+      <div class="pt-swatches pt-hidden" id="ptSw${t.id}">
+        ${PT_PALETTE.map(c=>`<span class="pt-swatch${c===t.color?' sel':''}" style="background:${c}" onclick="ptSetColor(${t.id},'${c}')"></span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+function ptToggleSwatches(id){
+  document.querySelectorAll('.pt-swatches').forEach(el=>{
+    if(el.id!=='ptSw'+id) el.classList.add('pt-hidden');
+  });
+  document.getElementById('ptSw'+id).classList.toggle('pt-hidden');
+}
+function ptSetColor(id,color){
+  ptData.teams.find(t=>t.id===id).color=color;
+  ptSave();ptRenderTeamsManage();
+}
+function ptRenameTeam(id,val){
+  ptData.teams.find(t=>t.id===id).name=val||'فريق';
+  ptSave();
+}
+function ptDeleteTeam(id){
+  if(ptData.teams.length<=2){alert('لازم يبقى فريقين على الأقل');return;}
+  if(!confirm('تحذفون هذا الفريق؟ بتنحذف نقاطه من كل الأنشطة.')) return;
+  ptData.teams=ptData.teams.filter(t=>t.id!==id);
+  ptData.weeks.forEach(wk=>wk.activities.forEach(a=>{ delete a.pts[id]; }));
+  ptSave();
+  ptRenderTeamsManage();
+}
+function ptAddTeam(){
+  const nextId=Math.max(0,...ptData.teams.map(t=>t.id))+1;
+  const color=PT_PALETTE[ptData.teams.length%PT_PALETTE.length];
+  ptData.teams.push({id:nextId,name:'فريق '+nextId,color});
+  ptSave();
+  ptRenderTeamsManage();
+}
+
+function ptConfirmReset(){
+  if(!confirm('بيتحذف كل شيء: الفرق والنقاط لكل الأسابيع، ولا يرجع. متأكدين؟')) return;
+  ptData=ptDefaultData();
+  ptSave();
+  ptShowView('map');
+}
+
+function ptRevealWinner(){
+  const totals=ptData.teams.map(t=>({...t,total:ptGrandTotal(t.id)}));
+  const sorted=[...totals].sort((a,b)=>b.total-a.total);
+  const top=sorted[0]?.total ?? 0;
+  const winners=sorted.filter(t=>t.total===top);
+  sWin();bigConfetti();
+  document.getElementById('ptWinTitle').textContent=
+    sorted.length===0 ? 'ما فيه فرق!' :
+    (top===0 ? 'ما فيه نقاط مسجلة بعد' :
+    (winners.length>1 ? 'تعادل في الصدارة!' : '👑 الفائز: '+winners[0].name));
+  const medalColors=['#F5B32F','#B9C4CB','#D89A6A'];
+  document.getElementById('ptRankList').innerHTML=sorted.map((t,i)=>`
+    <div class="row">
+      <span class="medal" style="background:${medalColors[i]||'#9AA7AD'}">${i+1}</span>
+      <span>${t.name}</span><span class="pts">${t.total}</span>
+    </div>`).join('');
+  document.getElementById('ptWinOverlay2').classList.add('show');
+}
+function ptCloseWinner(){ document.getElementById('ptWinOverlay2').classList.remove('show'); }
 </script>
 <script>
 if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
